@@ -15,6 +15,7 @@ class MainWindow(wx.Frame):
         self.stimCfgDlg = MIStimCfgDlg(self)
         self.dataServer = None
         self.monitor = SignalMonitor(self)
+        self.graz = None
 
     def initUI(self):
         self.SetWindowStyle(wx.DEFAULT_FRAME_STYLE & ~(
@@ -24,30 +25,30 @@ class MainWindow(wx.Frame):
 
         bs = wx.BoxSizer(wx.HORIZONTAL)
         self.MIBtn = wx.Button(
-            panel, label="Graz Configure", size=wx.Size(72, 36))
+            panel, label="Graz\nConfigure", size=wx.Size(72, 72))
         self.MIBtn.Bind(wx.EVT_BUTTON, self.onMIBtn)
         self.BeginBtn = wx.Button(
-            panel, label="Launch", size=wx.Size(72, 36))
+            panel, label="Launch", size=wx.Size(144, 72))
         self.BeginBtn.Bind(wx.EVT_BUTTON, self.onBeginBtn)
         self.QuitBtn = wx.Button(
-            panel, label="Quit", size=wx.Size(72, 36))
+            panel, label="Quit", size=wx.Size(144, 72))
         self.QuitBtn.Bind(wx.EVT_BUTTON, self.onQuitBtn)
 
-        bs.Add(self.MIBtn)
-        bs.Add(self.BeginBtn)
-        bs.Add(self.QuitBtn)
-        vs.Add(bs)
+        bs.Add(self.MIBtn, wx.ALIGN_CENTER)
+        bs.Add(self.BeginBtn, wx.ALIGN_CENTER)
+        bs.Add(self.QuitBtn, wx.ALIGN_CENTER)
+        vs.Add(bs, wx.ALIGN_CENTER)
 
         bs = wx.BoxSizer(wx.HORIZONTAL)
         self.StartBtn = wx.Button(
-            panel, label="Start", size=wx.Size(72, 36))
+            panel, label="Start\nMonitor", size=wx.Size(72, 36))
         self.StartBtn.Bind(wx.EVT_BUTTON, lambda x: self.monitor.run())
         self.StopBtn = wx.Button(
-            panel, label="Stop", size=wx.Size(72, 36))
+            panel, label="Stop\nMonitor", size=wx.Size(72, 36))
         self.StopBtn.Bind(wx.EVT_BUTTON, lambda x: self.monitor.stop())
-        bs.Add(self.StartBtn)
-        bs.Add(self.StopBtn)
-        vs.Add(bs)
+        bs.Add(self.StartBtn, wx.ALIGN_CENTER)
+        bs.Add(self.StopBtn, wx.ALIGN_CENTER)
+        vs.Add(bs, wx.ALIGN_CENTER)
         panel.SetSizer(vs)
 
     def onMIBtn(self, event):
